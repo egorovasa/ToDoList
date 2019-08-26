@@ -1,4 +1,4 @@
-package ru.egorovasa.todo;
+package ru.egorovasa.tictactoe;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import ru.egorovasa.todo.R;
 
 public class MainActivity extends AppCompatActivity implements OnClickListener {
     private Button[][] buttons = new Button[3][3];
@@ -121,6 +123,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
     private void draw() {
         Toast.makeText(this, "Draw!", Toast.LENGTH_SHORT).show();
+        resetBoard();
     }
 
     private void updatePointsText() {
