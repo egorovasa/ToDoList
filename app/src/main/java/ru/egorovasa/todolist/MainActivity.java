@@ -31,20 +31,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void add(View view) {
-        EditText edit = this.findViewById(R.id.recycler);
+        EditText edit = this.findViewById(R.id.editText);
         this.items.add(new Item(edit.getText().toString()));
         edit.setText("");
         adapter.notifyItemInserted(this.items.size() - 1);
     }
 
     public void delete(View view) {
-        EditText edit = this.findViewById(R.id.recycler);
-        int index = 0;
-        if (this.items.contains(edit.getText().toString())) {
-            index = this.items.indexOf(edit);
-            this.items.remove(this.items.remove(edit));
+        EditText edit = this.findViewById(R.id.editText);
+        Item myItem = new Item(edit.getText().toString());
+        int index = this.items.indexOf(myItem);
+        boolean result = this.items.remove(myItem);
+        if (result) {
             edit.setText("");
-            adapter.notifyItemRemoved(this.items.size() + 1);
+            adapter.notifyItemRemoved(index);
             Toast.makeText(this, "Пункт удалён!", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "Такого пункта в списке нет.", Toast.LENGTH_SHORT).show();
@@ -64,7 +64,8 @@ public class MainActivity extends AppCompatActivity {
             return new RecyclerView.ViewHolder(
                     LayoutInflater.from(parent.getContext())
                             .inflate(R.layout.items, parent, false)
-            ) {};
+            ) {
+            };
         }
 
         @Override

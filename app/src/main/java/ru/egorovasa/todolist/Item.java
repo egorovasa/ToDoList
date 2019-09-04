@@ -26,12 +26,14 @@ public class Item {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) {
             return false;
-        } Item item = (Item) o;
+        }
+        Item item = (Item) o;
         return Objects.equals(name, item.name);
     }
+
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
-    public int hashCode(){
+    public int hashCode() {
         return Objects.hash(name);
     }
 }
