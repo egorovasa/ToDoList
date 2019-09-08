@@ -3,21 +3,43 @@ package ru.egorovasa.todolist;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 
+import java.util.Calendar;
 import java.util.Objects;
 
 public class Item {
     private String name;
+    private Calendar created;
 
-    public Item(String name) {
+    public void setDone(boolean done) {
+        this.done = done;
+    }
+
+    private boolean done;
+
+
+    public Item(String name, Calendar created) {
         this.name = name;
+        this.created = created;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName() {
+    public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isDone() {
+        return done;
+    }
+
+    public Calendar getCreated() {
+        return created;
+    }
+
+    public void setCreated(Calendar created) {
+        this.created = created;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
