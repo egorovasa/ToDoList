@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">ToDoList</string>
-    <string name="add_button">Add</string>
-    <string name="delete_button">Delete</string>
-    <string name="edit_text_name">Enter item</string>
+    <string name="add_button">ADD</string>
+    <string name="delete_button">DELETE</string>
+    <string name="edit_text_name">ENTER ITEM</string>
+    <string name="saveButton">SAVE</string>
+    <string name="description_field">Description</string>
+    <string name="name_field">Name</string>
 </resources>

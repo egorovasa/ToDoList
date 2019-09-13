@@ -1,5 +1,6 @@
 package ru.egorovasa.todolist;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,16 +14,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-    private final List<Item> items = new ArrayList<>();
-    private final RecyclerView.Adapter adapter = new ItemAdapter(this.items);
+    private final RecyclerView.Adapter adapter = new ItemAdapter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,17 +32,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void add(View view) {
-        EditText edit = this.findViewById(R.id.editText);
-        this.items.add(new Item(edit.getText().toString().toLowerCase(), Calendar.getInstance()));
-        edit.setText("");
-        adapter.notifyItemInserted(this.items.size() - 1);
+        Intent intent = new Intent(this.getApplicationContext(), AddActivity.class);
+        startActivity(intent);
     }
 
     public void delete(View view) {
         EditText edit = this.findViewById(R.id.editText);
-        Item myItem = new Item(edit.getText().toString().toLowerCase(), Calendar.getInstance());
-        int index = this.items.indexOf(myItem);
-        boolean result = this.items.remove(myItem);
+        TextView editDescription = this.findViewById(R.id.description);
+
+        Item myItem = new Item(edit.getText().toString().toLowerCase(), Calendar.getInstance(), editDescription.getText().toString().toLowerCase());
+        int index = Store.getStore().getAll().indexOf(myItem);
+        boolean result = Store.getStore().getAll().remove(myItem);
         if (result) {
             edit.setText("");
             adapter.notifyItemRemoved(index);
@@ -57,11 +53,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private static final class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-        private final List<Item> items;
-
-        public ItemAdapter(List<Item> items) {
-            this.items = items;
-        }
 
         @NonNull
         @Override
@@ -78,10 +69,12 @@ public class MainActivity extends AppCompatActivity {
             TextView name = holder.itemView.findViewById(R.id.name);
             TextView created = holder.itemView.findViewById(R.id.created);
             TextView dataDone = holder.itemView.findViewById(R.id.dataDone);
+            TextView description = holder.itemView.findViewById(R.id.description);
 
-            Item item = this.items.get(index);
-            name.setText(String.format("%s. %s", index, this.items.get(index).getName()));
+            Item item = Store.getStore().get(index);
+            name.setText(String.format("%s. %s", index, item.getName()));
             created.setText(format(item.getCreated()));
+            description.setText(String.format("%s. %s", index, item.getDescription()));
             CheckBox done = holder.itemView.findViewById(R.id.done);
             done.setOnCheckedChangeListener((view, checked) -> {
                 item.setDone(checked);
@@ -99,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
-            return this.items.size();
+            return Store.getStore().size();
         }
     }
 }

@@ -7,19 +7,18 @@ import java.util.Calendar;
 import java.util.Objects;
 
 public class Item {
-    private String name;
+    private String name, description;
     private Calendar created;
+    private boolean done;
 
     public void setDone(boolean done) {
         this.done = done;
     }
 
-    private boolean done;
-
-
-    public Item(String name, Calendar created) {
+    public Item(String name, Calendar created, String description) {
         this.name = name;
         this.created = created;
+        this.description = description;
     }
 
     public String getName() {
@@ -30,10 +29,6 @@ public class Item {
         this.name = name;
     }
 
-    public boolean isDone() {
-        return done;
-    }
-
     public Calendar getCreated() {
         return created;
     }
@@ -41,6 +36,20 @@ public class Item {
     public void setCreated(Calendar created) {
         this.created = created;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+
+    public boolean isDone() {
+        return done;
+    }
+
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
