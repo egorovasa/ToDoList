@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -36,22 +37,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void delete(View view) {
-        EditText edit = this.findViewById(R.id.editText);
-        TextView editDescription = this.findViewById(R.id.description);
-
-        Item myItem = new Item(edit.getText().toString().toLowerCase(), Calendar.getInstance(), editDescription.getText().toString().toLowerCase());
-        int index = Store.getStore().getAll().indexOf(myItem);
-        boolean result = Store.getStore().getAll().remove(myItem);
-        if (result) {
-            edit.setText("");
-            adapter.notifyItemRemoved(index);
-            Toast.makeText(this, "Пункт удалён!", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "Такого пункта в списке нет.", Toast.LENGTH_SHORT).show();
-        }
-    }
-
     private static final class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         @NonNull
@@ -68,13 +53,14 @@ public class MainActivity extends AppCompatActivity {
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int index) {
             TextView name = holder.itemView.findViewById(R.id.name);
             TextView created = holder.itemView.findViewById(R.id.created);
-            TextView dataDone = holder.itemView.findViewById(R.id.dataDone);
             TextView description = holder.itemView.findViewById(R.id.description);
+            TextView dataDone = holder.itemView.findViewById(R.id.dataDone);
 
             Item item = Store.getStore().get(index);
-            name.setText(String.format("%s. %s", index, item.getName()));
+            name.setText(String.format("%s. %s", index + 1, item.getName()));
             created.setText(format(item.getCreated()));
-            description.setText(String.format("%s. %s", index, item.getDescription()));
+            description.setText(String.format("%s", item.getDescription()));
+
             CheckBox done = holder.itemView.findViewById(R.id.done);
             done.setOnCheckedChangeListener((view, checked) -> {
                 item.setDone(checked);
@@ -82,6 +68,12 @@ public class MainActivity extends AppCompatActivity {
                 if (!item.isDone()) {
                     dataDone.setText("");
                 }
+            });
+
+            Button deleteButton = holder.itemView.findViewById(R.id.button_delete);
+            deleteButton.setOnClickListener((View v) -> {
+                Store.getStore().getAll().remove(item);
+                notifyItemRemoved(index);
             });
         }
 

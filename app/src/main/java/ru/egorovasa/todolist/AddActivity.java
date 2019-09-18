@@ -19,7 +19,7 @@ public class AddActivity extends AppCompatActivity {
     public void save(View view) {
         EditText edit = this.findViewById(R.id.name);
         EditText editDescription = this.findViewById(R.id.description);
-        Store.getStore().add(new Item(edit.getText().toString().toLowerCase(), Calendar.getInstance(), editDescription.getText().toString().toLowerCase()));
+        Store.getStore().add(new Item(edit.getText().toString(), Calendar.getInstance(), editDescription.getText().toString()));
         Intent intent = new Intent(this.getApplicationContext(), MainActivity.class);
         startActivity(intent);
     }

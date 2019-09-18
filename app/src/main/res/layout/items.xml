@@ -52,4 +52,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/button_delete"
+        android:layout_width="72dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/delete_button"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/done" />
+
 </android.support.constraint.ConstraintLayout>
