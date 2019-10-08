@@ -20,6 +20,10 @@ public class Store {
         this.items.add(item);
     }
 
+    public void replace(int index, Item item) {
+        this.items.set(index, item);
+    }
+
     public List<Item> getAll() {
         return this.items;
     }

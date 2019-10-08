@@ -8,7 +8,7 @@
     tools:layout_editor_absoluteY="81dp">
 
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/item_name"
         android:layout_width="91dp"
         android:layout_height="wrap_content"
 
@@ -18,12 +18,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/description"
+        android:id="@+id/item_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="@+id/name"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
+        app:layout_constraintStart_toStartOf="@+id/item_name"
+        app:layout_constraintTop_toBottomOf="@+id/item_name" />
 
     <TextView
         android:id="@+id/created"
@@ -31,8 +31,8 @@
         android:layout_height="wrap_content"
 
         android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="@+id/description"
-        app:layout_constraintTop_toBottomOf="@id/description" />
+        app:layout_constraintStart_toStartOf="@+id/item_description"
+        app:layout_constraintTop_toBottomOf="@id/item_description" />
 
     <TextView
         android:id="@+id/dataDone"
@@ -42,7 +42,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toEndOf="@+id/created"
-        app:layout_constraintTop_toBottomOf="@id/description" />
+        app:layout_constraintTop_toBottomOf="@id/item_description" />
 
     <CheckBox
         android:id="@+id/done"
